@@ -8,7 +8,9 @@
 
   require_once("../dbconfig.php");
  	
- 
+  date_default_timezone_set("Asia/Kolkata");
+    $modified_on=date("Y-m-d h:i:sa");	
+	
 ?>
 
 <html>
@@ -50,11 +52,20 @@ if(isset($_POST["update_submit"]))
   $doj= $_POST["doj"];
   $status= $_POST["status"];
 
-  date_default_timezone_set("Asia/Kolkata");
-    $modified_on=date("Y-m-d h:i:sa");	
-	
-  
-} 
+ $query= "UPDATE `hiring_tbl` SET doj='".$doj."', status='".$status."' WHERE id=".$id;
+ $result= $conn->query($query);
+
+if($result===TRUE) 
+	{
+		$message = " Updated Successfully"; 
+		header('Location:hiring.php');
+		// header('Location:hiring.php?message='.$message);
+	} 
+	else
+	{
+		
+	}
+}
 ?>
 
 <div id="page-wrapper">
@@ -93,7 +104,7 @@ if(isset($_POST["update_submit"]))
 											<option value="Joined" <?php if($row['status']=='Joined'){ ?>selected="selected" <?php }?>>Joined
 											</option>
 											<option value="To Joined" <?php if($row['status']=='To Joined'){ ?>selected="selected" <?php }?>>To Joined</option>
-											<option value="Decliend" <?php if($row['status']=='Decliend'){ ?>selected="selected" <?php }?>>Decliend</option>
+											<option value="Declined" <?php if($row['status']=='Declined'){ ?>selected="selected" <?php }?>>Declined</option>
 									
 										</select>
 						</div>

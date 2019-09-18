@@ -79,20 +79,7 @@ include 'header.php';
             <h2 class="page-header">To Joined List</h2>  
         </div>
     </div>
-		<?php 
-        if(isset($message))
-        {
-    ?>
-    <div class="row" style="text-align:center;color:#337ab7;"> 
-    <?php 
-        echo $message;
-    ?>
-    </div>
-    <?php
-        }
-    ?>	
-	
-	
+		
 	<div class="row">
         <div class="col-lg-12">
           	<div class="panel panel-default">
@@ -128,10 +115,8 @@ include 'header.php';
                                 {
                                 ?>
                   <tr class="odd gradeX">
-                                        <td><a href="ex1.php?id=<?php echo $row['id'] ;?>"><?php echo $row['id'] ;?>
-                     </a></td>
-                    <td><a href="ex1.php?id=<?php echo $row['id'] ;?>"><?php echo $row['name'];?>
-                    </a></td>
+                    <td><?php echo $row['id'] ;?></td>
+                    <td><?php echo $row['name'];?></td>
                     <td><?php echo $row['doi'];?></td>
                     <td><?php echo $row['phone'];?></td>
                     <td ><?php echo $row['client'];?></td>

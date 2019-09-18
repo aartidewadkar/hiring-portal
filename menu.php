@@ -56,7 +56,7 @@
                         <a href="walk_in.php"><i class="fa fa-male"></i> Walk In</a>
                     </li>
                     <li>
-                        <a href="dashboard.php" ><i class="fa fa-dashboard fa-fw"></i> Drive Tracker</a>
+                        <a href="#" ><i class="fa fa-dashboard fa-fw"></i> Drive Tracker</a>
                     </li>
                     <li>
                         <a href="hiring.php"><i class="fa fa-list-alt fa-fw"></i>Reports</a>

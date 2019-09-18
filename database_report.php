@@ -53,7 +53,7 @@ include 'header.php';
 <div class="rowtxt" style="margin-top:10px;">
     <label>Specify Time Period: </label>
     <p>
-      <input name="quick" type="radio" value="yesterday" checked=""> Yesterday
+      <input name="quick" type="radio" value="yesterday" > Yesterday
       <input name="quick" type="radio" value="week" style="margin-left:10px;"> This Week
       <input name="quick" type="radio" value="month" style="margin-left:10px;"> This Month</p>
 </div>
@@ -198,6 +198,7 @@ if(isset($_POST['submit']))
                      </tr>
                     <?php 
                  }
+                  unset($_POST); 
              }
                     ?>
                                             

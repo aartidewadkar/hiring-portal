@@ -98,7 +98,7 @@ include 'header.php';
                                        Name
                                     </div>
                                     <div class="form-group" style="width:24%;padding-left: 0px;display:inline-block;">
-                                        <input class="form-control" placeholder="Full Name" style="width:100%;" required="required "name="name" type="text" autofocus>
+                                        <input class="form-control" placeholder="Cadidate Full Name" style="width:100%;" required="required "name="name" type="text" autofocus>
                                     </div>
                                     <div class="form-group" style="width:20%;padding-left: 40px;display:inline-block;">
                                       D.O.I
@@ -140,7 +140,7 @@ include 'header.php';
                                        Recruiter Id
                                     </div>
                                     <div class="form-group" style="width:24%;padding-left: 0px;display:inline-block;">
-                                        <input class="form-control" style="width:100%;" required="required "name="recruiter_id" type="email" autofocus>
+                                        <input class="form-control" style="width:100%;" required="required "name="recruiter_id" placeholder="Recruiter email" type="email" autofocus>
                                     </div>
                                      <div class="form-group" style="width:20%;padding-left: 0px;display:inline-block;">
                                        Status
