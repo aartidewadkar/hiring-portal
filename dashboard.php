@@ -27,144 +27,6 @@ include 'head.php';
 <script src="../js/dataTables/jquery.dataTables.min.js"></script>
 <script src="../js/dataTables/dataTables.bootstrap.min.js"></script>
 
-<?php 
-   $labels = [];
-   $counts = [];
-
-  $query= "SELECT name, count(recruiter_id) as num_candidate FROM recruiter_tbl group by name";
-    $result=$conn->query($query);
-    var_dump($result);
-  
-    // if($result->num_rows > 0){
-    //       while($row = $result->fetch_assoc()){
-            
-    //         // echo "['".$row['name']."', ".$row['num_candidate']."],";
-    //         array_push($labels,$row['name']);
-    //         array_push($counts,$row['num_candidate']);
-    //   // print_r($labels);
-            
-    //       }
-    //  }
-
-    //  else
-    //  {
-    //   echo "no records in this month";
-    //  }
-    //   var_dump($labels);
-?>
-<script>
-
-  $(function(){
-
-  //get the doughnut chart canvas
-  var ctx1 = $("#doughnut-chartcanvas-1");
-  var ctx2 = $("#doughnut-chartcanvas-2");
-
-  //doughnut chart data
-  var data1 = {
-    labels: ["Sneha", "Priya", "Archana"],
-    datasets: [
-      {
-        label: "TeamA Score",
-        data: [50, 70, 40],
-        backgroundColor: [
-          "#ff6699",
-          "#F4A460",
-          "#2E8B57"
-        ],
-        borderColor: [
-          "#b75ff5",
-          "#E39371",
-          "#1D7A46"
-        ],
-        borderWidth: [1, 1, 1]
-      }
-    ]
-  };
-
-  //doughnut chart data
-  var data2 = {
-    labels: [],
-    datasets: [
-      {
-        label: "TeamB Score",
-        data: [40, 60, 50],
-        backgroundColor: [
-          "#E9967A",
-          "#F5DEB3",
-          "#9ACD32"
-        ],
-        borderColor: [
-          "#D88569",
-          "#E4CDA2",
-          "#89BC21"
-        ],
-        borderWidth: [1, 1, 1]
-      }
-    ]
-  };
-
-  //options
-  var options1 = {
-    responsive: true,
-    title: {
-      display: true,
-      position: "top",
-      text: "Highest Performance",
-      fontSize: 18,
-      fontColor: "#111"
-    },
-    legend: {
-      display: true,
-      position: "bottom",
-      labels: {
-        fontColor: "#333",
-        fontSize: 16
-      }
-    }
-  };
-
-  var options2 = {
-    responsive: true,
-    title: {
-      display: true,
-      position: "top",
-      text: "Lowest Performance",
-      fontSize: 18,
-      fontColor: "#111"
-    },
-    legend: {
-      display: true,
-      position: "bottom",
-      labels: {
-        fontColor: "#333",
-        fontSize: 16
-      }
-    }
-  };
-
-  //create Chart class object
-  var chart1 = new Chart(ctx1, {
-    type: "doughnut",
-    data: data1,
-    options: options1
-  });
-
-  //create Chart class object
-  var chart2 = new Chart(ctx2, {
-    type: "doughnut",
-    data: data2,
-    options: options2
-  });
-});
-
-
-
-
-
-
-  
-</script>
 </head>
 
 
@@ -194,7 +56,10 @@ include 'head.php';
    background-color:rgba(0,0,0,0.5);
    cursor:pointer;
 }
-
+h1{
+  color: white;
+ 
+}
 
 
 </style>
@@ -218,7 +83,7 @@ include 'header.php';
         <div class="col-md-12">
       <div class="col-md-3 col-sm-3">
         <div  id="menu-block" style="background-color:#34495E">
-          <div  id="menu-icon" >
+          <div  id="menu-icon" ><a href="hiring.php">
             <?php 
               $query= "SELECT id FROM hiring_tbl order by id";
               $result=$conn->query($query);
@@ -226,7 +91,7 @@ include 'header.php';
              $row= mysqli_num_rows($result);
              echo '<h1>'.$row.'</h1>';
 
-            ?>
+            ?></a>
             <h3>Hiring</h3>
           </div>
           <div  id="menu-footer"><a href="hiring.php">More <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></div>
@@ -234,7 +99,7 @@ include 'header.php';
       </div>
       <div class="col-md-3 col-sm-3">
         <div  id="menu-block" style="background-color:#16A085;">
-          <div  id="menu-icon" >
+          <div  id="menu-icon" ><a href="joined.php">
             <?php 
               $query= "SELECT id FROM hiring_tbl WHERE status='Joined' order by id";
               $result=$conn->query($query);
@@ -242,7 +107,7 @@ include 'header.php';
              $row= mysqli_num_rows($result);
              echo '<h1>'.$row.'</h1>';
 
-            ?>
+            ?></a>
             <h3>Joined</h3>
           </div>
           <div  id="menu-footer"><a href="joined.php">More <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></div>
@@ -250,7 +115,7 @@ include 'header.php';
       </div>
       <div class="col-md-3 col-sm-3">
         <div  id="menu-block" style="background-color:#F39C12;">
-          <div  id="menu-icon" >
+          <div  id="menu-icon" ><a href="to_joined.php">
              <?php 
               $query= "SELECT id FROM hiring_tbl WHERE status='To Joined' order by id";
               $result=$conn->query($query);
@@ -258,7 +123,7 @@ include 'header.php';
              $row= mysqli_num_rows($result);
              echo '<h1>'.$row.'</h1>';
 
-            ?>
+            ?></a>
             <h3>To Joined</h3>
           </div>
           <div  id="menu-footer"><a href="to_joined.php">More <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></div>
@@ -266,7 +131,7 @@ include 'header.php';
       </div>
       <div class="col-md-3 col-sm-3">
         <div  id="menu-block" style="background-color:#ff4d4d;">
-          <div  id="menu-icon" >
+          <div  id="menu-icon" ><a href="decliend.php">
            <?php 
               $query= "SELECT id FROM hiring_tbl WHERE status='Declined' order by id";
               $result=$conn->query($query);
@@ -274,7 +139,7 @@ include 'header.php';
              $row= mysqli_num_rows($result);
              echo '<h1>'.$row.'</h1>';
 
-            ?>
+            ?></a>
             <h3>Declined</h3>
           </div>
           <div  id="menu-footer"><a href="decliend.php">More <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></a></div>
@@ -286,27 +151,79 @@ include 'header.php';
   <hr>
   <div class="row" style="margin-top: 5%;">
     <div class="col-md-6">
-      <canvas id="doughnut-chartcanvas-1"></canvas>
+      <div class="table-wrapper-scroll-y my-custom-scrollbar">
+     <table class="table table-bordered table-striped mb-0">
+       <thead>
+          <tr>
+           <th>Recruiter Name</th>
+           <th>Total</th>
+           <th>Joined</th>
+           <th>To Joined</th>
+           <th>Rejected</th>
+          </tr>
+        </thead>
+         <tbody>
+         <?php
+         $query ="SELECT COUNT(*), status, recruiter FROM `hiring_tbl` 
+        WHERE status='Joined' GROUP BY status";
+
+
+//          $query="SELECT hiring_tbl.recruiter FROM `hiring_tbl` 
+// INNER JOIN hiring_tbl ON hiring_tbl.recruiter_id=hiring_tbl.id 
+// WHERE results.subject='History' and results.result='excellence'
+// GROUP BY hiring_tbl.name";
+
+
+
+// SELECT recruiter_tbl.name, count(hiring_tbl.id) FROM `hiring_tbl` 
+// INNER JOIN recruiter_tbl ON hiring_tbl.recruiter_id=recruiter_tbl.id
+// GROUP BY hiring_tbl.recruiter_id
+// HAVING count(hiring_tbl.status) > 0
+// ORDER BY count(hiring_tbl.status) ASC;  
+
+
+         $result= $conn->query($query);
+
+          $row= mysqli_num_rows($result);
+             // echo '<h1>'.$row.'</h1>';
+
+          if ($result->num_rows>0)
+           {
+            
+            while ($row= $result->fetch_assoc()) 
+            {
+              
+            ?>
+              <tr class="odd gradeX">
+               <td><?php echo $row['recruiter'];?></td>
+
+
+             </tr>
+             <?php 
+                 }
+             }
+                    ?>
+
+           
+        </tbody>
+     </table>
+    </div>
+
     </div>
     <div class="col-md-6">
-      <canvas id="doughnut-chartcanvas-2"></canvas>
+      <canvas id="densityChart" width="200" height="160"></canvas>
     </div>
-    <?php
-
     
-     ?>
   </div>
   <hr>
-
-  <div class="row">
-  <canvas id="densityChart" width="600" height="400"></canvas>
-</div>
-  
   </div>
   
   </div>
 
 </body>
+<?php 
+  
+?>
 <script type="text/javascript">
 
   $(function(){
@@ -314,28 +231,26 @@ include 'header.php';
   
   var densityCanvas = document.getElementById("densityChart");
 
-// Chart.defaults.global.defaultFontFamily = "Lato";
-// Chart.defaults.global.defaultFontSize = 18;
 
-var densityData = {
-  label: 'Density of Planet (kg/m3)',
-  data: [5427, 5243, 5514, 3933, 1326, 687, 1271, 1638],
+var last_yr_record = {
+  label: '2018 (Last Year)',
+  data: [1300, 1400, 1500, 1100, 1100, 687, 1271, 1638, 1000, 800, 900, 1250],
   backgroundColor: 'rgba(0, 99, 132, 0.6)',
   borderWidth: 0,
   yAxisID: "y-axis-density"
 };
 
-var gravityData = {
-  label: 'Gravity of Planet (m/s2)',
-  data: [3.7, 8.9, 9.8, 3.7, 23.1, 9.0, 8.7, 11.0],
+var current_yr_record = {
+  label: '2019 (Current Year)',
+  data: [3.7, 8.9, 9.8, 3.7, 23.1, 9.0, 8.7, 11.0, 4.8, 10.2,14.2,8.9],
   backgroundColor: 'rgba(99, 132, 0, 0.6)',
   borderWidth: 0,
   yAxisID: "y-axis-gravity"
 };
 
-var planetData = {
-  labels: ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"],
-  datasets: [densityData, gravityData]
+var month_record = {
+  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  datasets: [last_yr_record, current_yr_record]
 };
 
 var chartOptions = {
@@ -354,7 +269,7 @@ var chartOptions = {
 
 var barChart = new Chart(densityCanvas, {
   type: 'bar',
-  data: planetData,
+  data: month_record,
   options: chartOptions
 });
 
