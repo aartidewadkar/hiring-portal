@@ -1,4 +1,8 @@
 
+<?php
+include 'head.php';
+?>
+
 <html>
 <?php
  session_cache_limiter(FALSE);
@@ -12,22 +16,13 @@
  
 ?>
 <head>
-  <!-- jQuery -->
-<script src="../js/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-<script src="../js/bootstrap.min.js"></script>
-
-        <!-- Metis Menu Plugin JavaScript -->
-<script src="../js/metisMenu.min.js"></script>
-
-       
-<!-- Custom Theme JavaScript -->
-<script src="../js/startmin.js"></script>
-
+ 
       
 <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" />
  <script src=" https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+
+ <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script> -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <script src="../js/dataTables/jquery.dataTables.min.js"></script>
 <script src="../js/dataTables/dataTables.bootstrap.min.js"></script>
@@ -162,6 +157,13 @@
     options: options2
   });
 });
+
+
+
+
+
+
+  
 </script>
 </head>
 
@@ -196,9 +198,6 @@
 
 
 </style>
-<?php
-include 'head.php';
-?>
 
 <body>
 <?php
@@ -298,12 +297,70 @@ include 'header.php';
      ?>
   </div>
   <hr>
+
+  <div class="row">
+  <canvas id="densityChart" width="600" height="400"></canvas>
+</div>
   
   </div>
   
   </div>
 
 </body>
+<script type="text/javascript">
+
+  $(function(){
+    
+  
+  var densityCanvas = document.getElementById("densityChart");
+
+// Chart.defaults.global.defaultFontFamily = "Lato";
+// Chart.defaults.global.defaultFontSize = 18;
+
+var densityData = {
+  label: 'Density of Planet (kg/m3)',
+  data: [5427, 5243, 5514, 3933, 1326, 687, 1271, 1638],
+  backgroundColor: 'rgba(0, 99, 132, 0.6)',
+  borderWidth: 0,
+  yAxisID: "y-axis-density"
+};
+
+var gravityData = {
+  label: 'Gravity of Planet (m/s2)',
+  data: [3.7, 8.9, 9.8, 3.7, 23.1, 9.0, 8.7, 11.0],
+  backgroundColor: 'rgba(99, 132, 0, 0.6)',
+  borderWidth: 0,
+  yAxisID: "y-axis-gravity"
+};
+
+var planetData = {
+  labels: ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"],
+  datasets: [densityData, gravityData]
+};
+
+var chartOptions = {
+  scales: {
+    xAxes: [{
+      barPercentage: 1,
+      categoryPercentage: 0.6
+    }],
+    yAxes: [{
+      id: "y-axis-density"
+    }, {
+      id: "y-axis-gravity"
+    }]
+  }
+};
+
+var barChart = new Chart(densityCanvas, {
+  type: 'bar',
+  data: planetData,
+  options: chartOptions
+});
+
+})
+
+</script>
 </html>
 
 
