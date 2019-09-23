@@ -148,11 +148,11 @@ include 'header.php';
       
     </div>
   </div>
-  <hr>
+ 
   <div class="row" style="margin-top: 5%;">
     <div class="col-md-6">
       <div class="table-wrapper-scroll-y my-custom-scrollbar">
-     <table class="table table-bordered table-striped mb-0">
+     <table class="table table-bordered table-striped mb-0" style="font-size: 13px;"  id="dataTables-example">
        <thead>
           <tr>
            <th>Recruiter Name</th>
@@ -160,34 +160,21 @@ include 'header.php';
            <th>Joined</th>
            <th>To Joined</th>
            <th>Rejected</th>
+           <th>CR Trend</th>
           </tr>
         </thead>
          <tbody>
-         <?php
-         $query ="SELECT COUNT(*), status, recruiter FROM `hiring_tbl` 
-        WHERE status='Joined' GROUP BY status";
 
+      <?php
+       
+      $query="SELECT recruiter, count(id) as Total, 
+        sum(case when status='Joined' then 1 else 0 end) as Joined,
+        sum(case when status='To Joined' then 1 else 0 end) as ToJoined,
+        sum(case when status='Declined' then 1 else 0 end) as Declined
+        from hiring_tbl GROUP BY recruiter";
 
-//          $query="SELECT hiring_tbl.recruiter FROM `hiring_tbl` 
-// INNER JOIN hiring_tbl ON hiring_tbl.recruiter_id=hiring_tbl.id 
-// WHERE results.subject='History' and results.result='excellence'
-// GROUP BY hiring_tbl.name";
-
-
-
-// SELECT recruiter_tbl.name, count(hiring_tbl.id) FROM `hiring_tbl` 
-// INNER JOIN recruiter_tbl ON hiring_tbl.recruiter_id=recruiter_tbl.id
-// GROUP BY hiring_tbl.recruiter_id
-// HAVING count(hiring_tbl.status) > 0
-// ORDER BY count(hiring_tbl.status) ASC;  
-
-
-         $result= $conn->query($query);
-
-          $row= mysqli_num_rows($result);
-             // echo '<h1>'.$row.'</h1>';
-
-          if ($result->num_rows>0)
+       $result= $conn->query($query);
+         if ($result->num_rows>0)
            {
             
             while ($row= $result->fetch_assoc()) 
@@ -196,7 +183,10 @@ include 'header.php';
             ?>
               <tr class="odd gradeX">
                <td><?php echo $row['recruiter'];?></td>
-
+               <td><?php echo $row['Total'];?></td>
+               <td><?php echo $row['Joined'];?></td>
+               <td><?php echo $row['ToJoined'];?></td>
+               <td><?php echo $row['Declined'];?></td>
 
              </tr>
              <?php 
@@ -205,25 +195,28 @@ include 'header.php';
                     ?>
 
            
+           
         </tbody>
      </table>
+    </div>
+     <div>
+      <canvas id="myChart" width="10" height="5"></canvas>
     </div>
 
     </div>
     <div class="col-md-6">
       <canvas id="densityChart" width="200" height="160"></canvas>
     </div>
-    
-  </div>
-  <hr>
+    </div>
+
+   
+ 
   </div>
   
   </div>
 
 </body>
-<?php 
-  
-?>
+
 <script type="text/javascript">
 
   $(function(){
@@ -275,6 +268,41 @@ var barChart = new Chart(densityCanvas, {
 
 })
 
+
+// my chart js//
+var data3 = {
+    labels: [
+        // "Red",
+        // "Blue",
+        // "Yellow"
+    ],
+    datasets: [
+        {
+            data: [300, 50, 100],
+            backgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56"
+            ],
+            hoverBackgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56"
+            ]
+        }]
+};
+
+var ctx = document.getElementById("myChart");
+
+// And for a doughnut chart
+var myDoughnutChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: data3,
+    options: {
+      rotation: 1 * Math.PI,
+      circumference: 1 * Math.PI
+    }
+});
 </script>
 </html>
 
